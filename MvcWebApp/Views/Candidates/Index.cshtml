@@ -10,6 +10,15 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <input type="text" name="firstName" />
+    <input type="text" name="lastName" />
+    <input type="text" name="email" />
+    <input type="text" name="phone" />
+    <input type="text" name="zipcode" />
+    <button type="submit">Searcu</button>
+</form>
 <table class="table">
     <thead>
         <tr>

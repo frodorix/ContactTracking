@@ -20,17 +20,14 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Candidates
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string firstName, string lastName, string email, string phone, string zipcode)
         {
-            string firstName="i";
-            string lastName="";
-            string email="";
-            string phone="";
-            string zipcode="";
+            if (firstName==null && lastName==null && email==null && phone==null && zipcode==null)
+                return View(new List<MCandidate>());
             var result = await _candidateService.FindCandidate(firstName, lastName, email, phone, zipcode);
                           
             return View(result);
         }
-        
+      
     }
 }
