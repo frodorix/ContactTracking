@@ -34,6 +34,11 @@ namespace Core.Contacts.Application
             return newId;
         }
 
+        public Task<MCandidate> FindAsync(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 2) Search Candidates. This should provide the ability to search the candidates entered in Step 1 
         /// and present the results to the end user in a grid or some other manner - presentation is up to
@@ -57,6 +62,19 @@ namespace Core.Contacts.Application
                 return candidates;
         }
 
-        
+        public Task<MCandidate> GetById(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> Update(MCandidate candidate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

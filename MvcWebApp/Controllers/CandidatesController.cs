@@ -7,6 +7,7 @@ using Core.Contacts.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MvcWebApp.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -51,8 +52,8 @@ namespace WebApplication1.Controllers
 
         // POST: Candidates/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,PhoneNumber,Zipcode")] MCandidate candidate)
+       // [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,PhoneNumber,Zipcode")] DCandidate candidate)
         {
             if (ModelState.IsValid)
             {
