@@ -9,7 +9,7 @@ namespace Infrastructure.Persistence.Extensions
     public static class ConfigureInfrastructure
     {
 
-        public static IServiceCollection UseInfrastructurePersistence(this IServiceCollection services, IConfiguration config )
+        public static IServiceCollection UseInfrastructurePersistenceNoStorage(this IServiceCollection services, IConfiguration config )
         {
          
 

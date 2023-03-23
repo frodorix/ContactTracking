@@ -1,8 +1,24 @@
+using Infrastructure.Persistence.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
+#region APP DI
+if (builder.Configuration.GetValue<int>("Persistence:UseSql") == 1)
+{
+    builder.Services.UseInfrastructurePersistence(builder.Configuration);
+}
+else
+{
+    builder.Services.UseInfrastructurePersistenceNoStorage(builder.Configuration);
+}
+builder.Services.UseCoreServices();
+
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,5 +39,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+if (builder.Configuration.GetValue<string>("Persistence:seed") == "Y")
+{
+    app.Services.SeedCandidates();
+
+}
 
 app.Run();
