@@ -29,7 +29,7 @@ namespace Core.Contacts.Domain.Models
             Zipcode = zipcode;
         }
 
-        public string FirstName { get; }
+      
 
         public void Validate()
         {
@@ -52,7 +52,7 @@ namespace Core.Contacts.Domain.Models
             
 
         }
-
+        public string FirstName { get; }
         public string LastName { get; }
         public string Email { get; }
         public string PhoneNumber { get; }
