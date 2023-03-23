@@ -5,6 +5,7 @@ using Core.Contacts.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,5 +56,7 @@ namespace Core.Contacts.Application
             IEnumerable<MCandidate> candidates = await this.candidateRepository.FindCandidate(fistName, lastName, email, phone, zipcode);
                 return candidates;
         }
+
+        
     }
 }

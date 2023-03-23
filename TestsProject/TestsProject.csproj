@@ -20,7 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Contacts\Core.Contacts.csproj" />
-    <ProjectReference Include="..\InfrastructurePersistenceNoStorage\Infrastructure.Persistence.NoStorage.csproj" />
+    <ProjectReference Include="..\Infrastructure.Persistence.NoStorage\Infrastructure.Persistence.NoStorage.csproj" />
+    <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

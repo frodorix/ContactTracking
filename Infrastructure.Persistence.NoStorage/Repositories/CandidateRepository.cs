@@ -35,5 +35,6 @@ namespace Infrastructure.Persistence.NoStorage.Repositories
                 ).ToList(); ;
             return candidates;
         }
+
     }
 }
