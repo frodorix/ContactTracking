@@ -9,7 +9,7 @@ namespace Core.Contacts.Application.Interfaces
 {
     public interface ICandidateService
     {
-        Task<int> CreateCandidate(string fistName, string lastName, string email, string phoneNumber, string zipcode);
-        Task<IEnumerable<MCandidate>> FindCandidate(string fistName, string lastName, string email, string phone, string zipcode);
+        Task<int> CreateCandidate(string firstName, string lastName, string email, string phoneNumber, string zipcode);
+        Task<IEnumerable<MCandidate>> FindCandidate(string firstName, string lastName, string email, string phone, string zipcode);
     }
 }

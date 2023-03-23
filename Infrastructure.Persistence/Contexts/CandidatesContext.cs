@@ -16,10 +16,6 @@ namespace Infrastructure.Persistence.Contexts
         {
         }
 
-        protected CandidatesContext()
-        {
-        }
-
         public virtual DbSet<Candidate> Candidates { get; set; }
 
 

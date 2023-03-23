@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Infrastructure.Persistence.Entity
 {
     [Table("Candidate")]
-    public class Candidate
+    internal class Candidate
     {
         public Candidate() { }
         public Candidate(string firstName, string lastName, string email, string phoneNumber, string zipcode)
