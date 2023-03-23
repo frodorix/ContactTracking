@@ -28,6 +28,116 @@ namespace WebApplication1.Controllers
                           
             return View(result);
         }
-      
+        
+        // GET: Candidates/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+
+
+            var candidate = await _candidateService.GetById(id);
+            if (candidate == null)
+            {
+                return NotFound();
+            }
+
+            return View(candidate);
+        }
+
+        // GET: Candidates/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Candidates/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,PhoneNumber,Zipcode")] MCandidate candidate)
+        {
+            if (ModelState.IsValid)
+            {
+                int id= await _candidateService.CreateCandidate(candidate.FirstName,candidate.LastName,candidate.Email, candidate.PhoneNumber, candidate.Zipcode);                
+                return RedirectToAction(nameof(Index));
+            }
+            return View(candidate);
+        }
+
+        // GET: Candidates/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null )
+            {
+                return NotFound();
+            }
+
+            MCandidate candidate = await _candidateService.FindAsync(id);
+            if (candidate == null)
+            {
+                return NotFound();
+            }
+            return View(candidate);
+        }
+
+        // POST: Candidates/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Email,PhoneNumber,Zipcode")] MCandidate candidate)
+        {
+            if (id != candidate.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                int updateCount = await _candidateService.Update(candidate);
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(candidate);
+        }
+
+        // GET: Candidates/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null )
+            {
+                return NotFound();
+            }
+
+            var candidate = await _candidateService.FindAsync(id);
+            if (candidate == null)
+            {
+                return NotFound();
+            }
+
+            return View(candidate);
+        }
+
+        // POST: Candidates/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var candidate = await _candidateService.FindAsync(id);
+            if (candidate != null)
+            {
+                try
+                {
+                    int deleteCount = await _candidateService.Remove(id);
+                }
+                catch (Exception)
+                {
+
+                    return NotFound();
+                }
+                
+            }
+            
+            return RedirectToAction(nameof(Index));
+        }
+
+       
+
     }
 }
