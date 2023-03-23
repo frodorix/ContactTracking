@@ -16,9 +16,6 @@ namespace Infrastructure.Persistence.Extensions
         {
             var serviceScopeFactory = (IServiceScopeFactory)serviceProvider.GetService(typeof(IServiceScopeFactory));
 
-            //var context = new CandidatesContext()//serviceProvider.GetRequiredService< CandidatesContext>();
-
-
             using (IServiceScope scope = serviceScopeFactory.CreateScope())
             {
                 var services = scope.ServiceProvider;
