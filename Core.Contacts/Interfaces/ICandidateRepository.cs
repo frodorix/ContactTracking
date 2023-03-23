@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.Contacts.Interfaces
 {
-    internal interface ICandidateRepository
+    public interface ICandidateRepository
     {
-      Task<int>   Create(MCandidate candidate)
+        Task<int> Create(string firstName, string lastName, string email, string phoneNumber, string zipcode);
+        Task<IEnumerable<MCandidate>> FindCandidate(string fistName, string lastName, string email, string phone, string zipcode);
     }
 }
