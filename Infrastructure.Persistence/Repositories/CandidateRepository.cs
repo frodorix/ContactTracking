@@ -21,7 +21,7 @@ namespace Infrastructure.Persistence.Repositories
         }
       
 
-        public async Task<int> Create(string firstName, string lastName, string email, string phoneNumber, string zipcode)
+        public async Task<int> CreateAsync(string firstName, string lastName, string email, string phoneNumber, string zipcode)
         {
             var candidate = new Candidate(firstName,lastName, email, phoneNumber, zipcode);
 
@@ -31,7 +31,16 @@ namespace Infrastructure.Persistence.Repositories
             return candidate.Id;
         }
 
-        public async Task<IEnumerable<MCandidate>> FindCandidate(string firstName, string lastName, string email, string phone, string zipcode)
+        public async Task<MCandidate?> FindAsync(int id)
+        {
+            var candidate = await this._dbContext.Candidates
+                .Where(x => x.Id == id)
+                .Select(c => new MCandidate(c.Id,c.FirstName, c.LastName, c.Email, c.PhoneNumber, c.Zipcode))
+                .FirstOrDefaultAsync();
+            return candidate;
+        }
+
+        public async Task<IEnumerable<MCandidate>> FindCandidateAsync(string firstName, string lastName, string email, string phone, string zipcode)
         {
             var candidates = await this._dbContext.Candidates
                 .Where(x => 
@@ -41,9 +50,28 @@ namespace Infrastructure.Persistence.Repositories
                    && (phone == null || x.PhoneNumber.ToLower().Contains(phone.ToLower()))
                    && (zipcode == null || x.Zipcode.ToLower().Contains(zipcode.ToLower()))
                )
-                .Select(c=> new MCandidate(c.FirstName,c.LastName,c.Email, c.PhoneNumber, c.Zipcode))
+                .Select(c=> new MCandidate(c.Id,c.FirstName,c.LastName,c.Email, c.PhoneNumber, c.Zipcode))
                 .ToListAsync(); ;
             return candidates;
+        }
+
+        public async Task<int> RemoveAsync(int id)
+        {
+            var candidate  = await _dbContext.Candidates.FindAsync(id);
+            if (candidate == null)
+                return -1;
+             _dbContext.Remove(candidate);
+            var couunt = await _dbContext.SaveChangesAsync();
+            return couunt;
+        }
+
+        public async Task<int> UpdateAsync(MCandidate candidate)
+        {
+            var entidad = new Candidate() { Id = candidate.Id , FirstName=candidate.FirstName, LastName=candidate.LastName, Email=candidate.Email, PhoneNumber=candidate.PhoneNumber,Zipcode=candidate.Zipcode};
+            _dbContext.Attach(entidad);
+            _dbContext.Entry(entidad).State = EntityState.Modified;
+            int modified = await _dbContext.SaveChangesAsync();
+            return modified;
         }
     }
 }

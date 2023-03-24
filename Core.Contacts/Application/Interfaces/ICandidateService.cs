@@ -10,10 +10,9 @@ namespace Core.Contacts.Application.Interfaces
     public interface ICandidateService
     {
         Task<int> CreateCandidate(string firstName, string lastName, string email, string phoneNumber, string zipcode);
-        Task<MCandidate> FindAsync(int? id);
+        Task<MCandidate> FindAsync(int id);
         Task<IEnumerable<MCandidate>> FindCandidate(string firstName, string lastName, string email, string phone, string zipcode);
-        Task<MCandidate> GetById(int? id);
         Task<int> Remove(int id);
-        Task<int> Update(MCandidate candidate);
+        Task<int> UpdateAsync(int id, string firstName, string lastName, string email, string phoneNumber, string zipcode);
     }
 }

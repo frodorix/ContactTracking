@@ -29,14 +29,23 @@ namespace Core.Contacts.Application
 
             var candidate = new MCandidate(firstName, lastName, email, phoneNumber, zipcode);
             candidate.Validate();
-            int newId = await candidateRepository.Create(firstName, lastName, email, phoneNumber, zipcode);
-            
-            return newId;
+            try
+            {
+                int newId = await candidateRepository.CreateAsync(firstName, lastName, email, phoneNumber, zipcode);
+                return newId;
+
+            }
+            catch (System.Exception e)
+            {
+
+                throw new CandidateException(e.InnerException.Message);
+            }
+
         }
 
-        public Task<MCandidate> FindAsync(int? id)
+        public async Task<MCandidate> FindAsync(int id)
         {
-            throw new NotImplementedException();
+            return await this.candidateRepository.FindAsync(id);
         }
 
         /// <summary>
@@ -58,23 +67,32 @@ namespace Core.Contacts.Application
         public async Task<IEnumerable<MCandidate>> FindCandidate(string fistName, string lastName, string email, string phone, string zipcode)
         {
 
-            IEnumerable<MCandidate> candidates = await this.candidateRepository.FindCandidate(fistName, lastName, email, phone, zipcode);
-                return candidates;
+            IEnumerable<MCandidate> candidates = await this.candidateRepository.FindCandidateAsync(fistName, lastName, email, phone, zipcode);
+            return candidates;
         }
 
-        public Task<MCandidate> GetById(int? id)
+
+
+        public async Task<int> Remove(int id)
         {
-            throw new NotImplementedException();
+            int deletedCount = await this.candidateRepository.RemoveAsync(id);
+            return deletedCount;
         }
 
-        public Task<int> Remove(int id)
+        public async Task<int> UpdateAsync(int id, string firstName, string lastName, string email, string phoneNumber, string zipcode)
         {
-            throw new NotImplementedException();
-        }
+            var candidate = new MCandidate(id, firstName, lastName, email, phoneNumber, zipcode);
+            candidate.Validate();
+            try
+            {
+                int updateCount = await this.candidateRepository.UpdateAsync(candidate);
+                return updateCount;
+            }
+            catch (System.Exception e)
+            {
+                throw new CandidateException(e.InnerException.Message);
+            }
 
-        public Task<int> Update(MCandidate candidate)
-        {
-            throw new NotImplementedException();
         }
     }
 }

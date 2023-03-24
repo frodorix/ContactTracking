@@ -3,11 +3,11 @@
     public class DCandidate
     {
         public DCandidate() { } 
-        public string FirstName { get; }
-        public string LastName { get; }
-        public string Email { get; }
-        public string PhoneNumber { get; }
-        public string Zipcode { get; }
-        public int Id { get; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Zipcode { get; set; }
+        public int Id { get; set; }
     }
 }

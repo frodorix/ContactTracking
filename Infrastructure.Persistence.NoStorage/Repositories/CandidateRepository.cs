@@ -16,7 +16,7 @@ namespace Infrastructure.Persistence.NoStorage.Repositories
         public CandidateRepository() {
             _candidatesDB = new List<MCandidate>();
         }
-        public async Task<int> Create(string firstName, string lastName, string email, string phoneNumber, string zipcode)
+        public async Task<int> CreateAsync(string firstName, string lastName, string email, string phoneNumber, string zipcode)
         {
             int newId = Interlocked.Increment(ref lastId);
             _candidatesDB.Add(new MCandidate(newId ,firstName, lastName, email, phoneNumber, zipcode));
@@ -24,7 +24,12 @@ namespace Infrastructure.Persistence.NoStorage.Repositories
             return  newId;
         }
 
-        public async Task<IEnumerable<MCandidate>> FindCandidate(string firstName, string lastName, string email, string phone, string zipcode)
+        public async Task<MCandidate?> FindAsync(int id)
+        {
+            return this._candidatesDB.Where(X => X.Id == id).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<MCandidate>> FindCandidateAsync(string firstName, string lastName, string email, string phone, string zipcode)
         {
             var candidates = _candidatesDB.Where(
                 x => (firstName == null || x.FirstName.ToLower().Contains(firstName.ToLower()))
@@ -36,5 +41,17 @@ namespace Infrastructure.Persistence.NoStorage.Repositories
             return candidates;
         }
 
+        public async Task<int> RemoveAsync(int id)
+        {
+          int count =  this._candidatesDB.RemoveAll(x => x.Id == id);
+            return count;
+        }
+
+        public async Task<int> UpdateAsync(MCandidate candidate)
+        {
+            await this.RemoveAsync(candidate.Id);
+             _candidatesDB.Add(candidate);
+            return 1;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using Infrastructure.Persistence.Extensions;
+using MvcWebApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
+var persistenceSettings = builder.Configuration.GetSection("Persistence").Get<MPersistenceConfig>();
 
 #region APP DI
-if (builder.Configuration.GetValue<int>("Persistence:UseSql") == 1)
+if (persistenceSettings.UseSql== "Y")
 {
     builder.Services.UseInfrastructurePersistence(builder.Configuration);
 }
@@ -42,7 +44,10 @@ app.MapControllerRoute(
 
 if (builder.Configuration.GetValue<string>("Persistence:seed") == "Y")
 {
-    app.Services.SeedCandidates();
+    if (persistenceSettings.UseSql == "Y")
+        app.Services.SeedCandidates();
+    else
+        app.Services.SeedCandidateNoStorage();
 
 }
 

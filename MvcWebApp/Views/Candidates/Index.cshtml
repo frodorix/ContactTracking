@@ -9,14 +9,33 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<form asp-action="Index" method="get">
-    <input type="text" name="firstName" />
-    <input type="text" name="lastName" />
-    <input type="text" name="email" />
-    <input type="text" name="phone" />
-    <input type="text" name="zipcode" />
-    <button type="submit">Searcu</button>
+<form asp-action="Index" method="get" class="form-container">
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" id="firstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" id="lastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" id="phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" name="zipcode" id="zipcode" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
 </form>
+
+
 <table class="table">
     <thead>
         <tr>

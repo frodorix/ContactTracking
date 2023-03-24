@@ -12,7 +12,7 @@ namespace Infrastructure.Persistence.Contexts
 {
     internal class CandidatesContext : DbContext
     {
-        public CandidatesContext(DbContextOptions options) : base(options)
+        public CandidatesContext(DbContextOptions<CandidatesContext> options) : base(options)
         {
         }
 
@@ -21,10 +21,10 @@ namespace Infrastructure.Persistence.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            /*if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Data Source=localhost, 8433;Initial Catalog=Candidates;Persist Security Info=True;User ID=sa;Password=yourStrongPassword#;TrustServerCertificate=true");
-            }
+            }*/
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

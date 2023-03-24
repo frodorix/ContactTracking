@@ -23,4 +23,14 @@ docker build -t $sqlimage MSSql\.
 #iniciar container
 docker run -d --name $sqlservercontainer  -p 8433:1433 --network $network $sqlimage
 
+echo "##############################################"
+echo "##### RUN DATABASE MIGRATION #################"
+echo "##############################################"
 
+cd ../Infrastructure.Persistence
+dotnet ef --startup-project ..\MvcWebApp database update
+cd ../Tools
+
+echo "##############################################"
+echo "########### DONE! ############################"
+echo "##############################################"

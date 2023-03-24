@@ -2,7 +2,72 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div >
+
+     <div class="container">
+      <div class="text">
+        <h1>Welcome to ContactTracking</h1>
+    <p>In Appsettings.json you can enable database Configurations.</p>
+    <code>
+      "Persistence": {
+        "UseSql": "N",
+        "Seed": "Y"
+      }
+    </code>
+    <p>For Sql Server:</p>
+    <ol>
+      <li>Set "UseSql": "Y"</li>
+      <li>Start a Power shell console.</li>
+      <li>Enter to ContactTracking/Tools</li>
+      <li>Run:
+        <code>./BUILDRunSQLServer.ps1</code>
+      </li>
+      <li>Wait while a docker container is created, also the database is created and migrations executed</li>
+      <li>Run MvcWebApp project with IIS Express</li>
+    </ol>    
+    </div>
+      <div class="image">
+        <img src="/images/contacts.png" alt="search candidates">
+      </div>
+    </div>
     
-    <h1>Welcome</h1>
+    
 </div>
+<style>
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  
+  code {
+    background-color: lightgray;
+    padding: 0.2em;
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  ol {
+    list-style-type: decimal;
+  }
+
+  .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+  .text {
+    flex: 1;
+  }
+  
+  .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

@@ -38,7 +38,7 @@ namespace TestsProject
 
             Mock<ICandidateRepository> candidateRepository = new Mock<ICandidateRepository>();
             candidateRepository
-                .Setup(x => x.Create(firstName,lastName,email,phoneNumber,zipcode))
+                .Setup(x => x.CreateAsync(firstName,lastName,email,phoneNumber,zipcode))
                 .ReturnsAsync(1);
             ICandidateService contactsService = new CandidateService(candidateRepository.Object);
 
@@ -113,8 +113,9 @@ namespace TestsProject
         /// this exercise, in order to save time.
         /// </summary>
         [Test]
-        public void Test_C_01_SearchCandidates()
+        public void Test_C_01_Pre_populationofCandidates()
         {
+            //Done with Faker.Net in Infrastructure Extensions
             Assert.Pass();
         }
     }
