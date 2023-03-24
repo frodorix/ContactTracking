@@ -1,5 +1,5 @@
 # ContactTracking
-In App settings.conf you can enable SQL database Configurations.
+In Appsettings.conf you can enable SQL database Configurations.
 
 "Persistence": {
     "UseSql": "N",
