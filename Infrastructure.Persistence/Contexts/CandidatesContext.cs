@@ -12,7 +12,7 @@ namespace Infrastructure.Persistence.Contexts
 {
     internal class CandidatesContext : DbContext
     {
-        public CandidatesContext(DbContextOptions<CandidatesContext> options) : base(options)
+        public CandidatesContext(DbContextOptions options) : base(options)
         {
         }
 
